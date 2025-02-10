@@ -1,7 +1,7 @@
 package com.mpx90.training_app.controllers.admin;
 
 import com.mpx90.training_app.dto.core.Routine;
-import com.mpx90.training_app.services.crud.RoutineService;
+import com.mpx90.training_app.services.admin.RoutineAdminService;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 @CrossOrigin
 public class RoutineAdminController {
 
-    private final RoutineService routineService;
+    private final RoutineAdminService routineService;
 
     @PostMapping
     public ResponseEntity<Routine> createRoutine(@RequestBody  Routine routine) {

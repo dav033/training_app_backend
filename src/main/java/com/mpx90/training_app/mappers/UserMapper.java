@@ -2,47 +2,41 @@ package com.mpx90.training_app.mappers;
 
 import com.mpx90.training_app.models.UserEntity;
 import com.mpx90.training_app.dto.core.User;
-import com.mpx90.training_app.models.payment.PaymentEntity;
-import com.mpx90.training_app.models.payment.SubscriptionEntity;
-import com.mpx90.training_app.models.payment.UserAccessEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface UserMapper extends GenericMapper<User, UserEntity> {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     // Mapeo de Entity a DTO
-    @Mapping(source = "payments", target = "paymentIds", qualifiedByName = "mapPaymentIds")
-    @Mapping(source = "subscriptions", target = "subscriptionIds", qualifiedByName = "mapSubscriptionIds")
-    @Mapping(source = "userAccesses", target = "userAccessIds", qualifiedByName = "mapUserAccessIds")
+    @Mapping(source = "uuid", target = "uuid", qualifiedByName = "mapUuidToString")
+    @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapCreatedAt")
     User toDto(UserEntity entity);
 
-    // Mapeo de DTO a Entity
-    @Mapping(target = "payments", ignore = true)
-    @Mapping(target = "subscriptions", ignore = true)
-    @Mapping(target = "userAccesses", ignore = true)
+    // Mapeo de DTO a Entity con manejo seguro de UUID y fechas
+    @Mapping(source = "uuid", target = "uuid", qualifiedByName = "mapStringToUuid")
+    @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapCreatedAt")
     UserEntity toEntity(User dto);
 
-    // Métodos auxiliares para mapear solo los IDs de las relaciones
-    @Named("mapPaymentIds")
-    default List<Long> mapPaymentIds(List<PaymentEntity> payments) {
-        return payments != null ? payments.stream().map(PaymentEntity::getId).collect(Collectors.toList()) : null;
+    @Named("mapUuidToString")
+    default String mapUuidToString(UUID uuid) {
+        return (uuid != null) ? uuid.toString() : null;
     }
 
-    @Named("mapSubscriptionIds")
-    default List<Long> mapSubscriptionIds(List<SubscriptionEntity> subscriptions) {
-        return subscriptions != null ? subscriptions.stream().map(SubscriptionEntity::getId).collect(Collectors.toList()) : null;
+    @Named("mapStringToUuid")
+    default UUID mapStringToUuid(String uuid) {
+        return (uuid != null && !uuid.isEmpty()) ? UUID.fromString(uuid) : UUID.randomUUID();
     }
 
-    @Named("mapUserAccessIds")
-    default List<Long> mapUserAccessIds(List<UserAccessEntity> userAccesses) {
-        return userAccesses != null ? userAccesses.stream().map(UserAccessEntity::getId).collect(Collectors.toList()) : null;
+    @Named("mapCreatedAt")
+    default LocalDateTime mapCreatedAt(LocalDateTime createdAt) {
+        return (createdAt != null) ? createdAt : LocalDateTime.now();
     }
 }

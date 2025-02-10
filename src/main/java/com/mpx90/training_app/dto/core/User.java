@@ -18,7 +18,4 @@ public class User {
     private String email;
     private UUID uuid;
     private LocalDateTime createdAt;
-    private List<Long> paymentIds;        // Referencia a PaymentEntity por IDs
-    private List<Long> subscriptionIds;   // Referencia a SubscriptionEntity por IDs
-    private List<Long> userAccessIds;     // Referencia a UserAccessEntity por IDs
 }

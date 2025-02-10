@@ -1,7 +1,7 @@
 package com.mpx90.training_app.controllers.admin;
 
 import com.mpx90.training_app.dto.core.Exercise;
-import com.mpx90.training_app.services.crud.ExerciseService;
+import com.mpx90.training_app.services.admin.ExerciseAdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin
 public class ExerciseAdminController {
-
-    private ExerciseService exerciseService;
+    private ExerciseAdminService exerciseService;
 
     @PostMapping
     public ResponseEntity<Exercise> createExercise(@RequestBody Exercise exercise) {

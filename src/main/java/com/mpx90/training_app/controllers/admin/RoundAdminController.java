@@ -2,7 +2,7 @@ package com.mpx90.training_app.controllers.admin;
 
 
 import com.mpx90.training_app.dto.core.Round;
-import com.mpx90.training_app.services.crud.RoundService;
+import com.mpx90.training_app.services.admin.RoundAdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.List;
 public class RoundAdminController {
 
 
-    private final RoundService roundService;
+    private final RoundAdminService roundService;
 
     @PostMapping
     public ResponseEntity<Round> createRound(@RequestBody Round round) {

@@ -1,15 +1,11 @@
 package com.mpx90.training_app.models;
+
 import com.mpx90.training_app.enums.Role;
-import com.mpx90.training_app.models.payment.PaymentEntity;
-import com.mpx90.training_app.models.payment.SubscriptionEntity;
-import com.mpx90.training_app.models.payment.UserAccessEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
-
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
@@ -24,6 +20,7 @@ public class UserEntity {
     private Long id;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Column(nullable = false, unique = true)
@@ -35,17 +32,13 @@ public class UserEntity {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PaymentEntity> payments;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubscriptionEntity> subscriptions;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserAccessEntity> userAccesses;
-
     @PrePersist
     protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+        if (this.uuid == null) {
+            this.uuid = UUID.randomUUID();
+        }
     }
 }

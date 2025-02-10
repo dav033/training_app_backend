@@ -3,6 +3,7 @@ package com.mpx90.training_app.dto.core;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter

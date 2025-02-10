@@ -3,6 +3,7 @@ package com.mpx90.training_app.mappers;
 import com.mpx90.training_app.dto.core.Round;
 import com.mpx90.training_app.models.training.RoundEntity;
 import com.mpx90.training_app.models.training.RoundExerciseEntity;
+import com.mpx90.training_app.models.training.RoutineEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -13,22 +14,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public interface RoundMapper {
+public interface RoundMapper extends GenericMapper<Round, RoundEntity> {
 
     RoundMapper INSTANCE = Mappers.getMapper(RoundMapper.class);
 
-    // Mapeo de Entity a DTO:
-    // Se mapea routine.id y, en lugar de roundType, se ignora o se deja null
-    // Además se transforma la colección de RoundExerciseEntity a una lista de IDs.
+    // Mapeo de Entity a DTO
     @Mapping(source = "routine.id", target = "routineId")
-    @Mapping(target = "roundTypeId", ignore = true)
+    @Mapping(source = "roundType.id", target = "roundTypeId", ignore = true)
     @Mapping(source = "roundExercises", target = "roundExerciseIds", qualifiedByName = "mapRoundExercisesToIds")
     Round toDto(RoundEntity entity);
 
-    // Mapeo de DTO a Entity:
-    // Se asigna routineId a routine.id y se ignora roundType para permitir
-    // la creación de un Round sin relación con RoundType.
-    @Mapping(source = "routineId", target = "routine.id")
+    // Mapeo de DTO a Entity
+    @Mapping(source = "routineId", target = "routine", qualifiedByName = "mapRoutineIdToEntity")
     @Mapping(target = "roundType", ignore = true)
     @Mapping(target = "roundExercises", ignore = true)
     RoundEntity toEntity(Round dto);
@@ -36,11 +33,19 @@ public interface RoundMapper {
     // Método auxiliar para transformar el Set de RoundExerciseEntity en una lista de IDs (Long)
     @Named("mapRoundExercisesToIds")
     default List<Long> mapRoundExercisesToIds(Set<RoundExerciseEntity> roundExercises) {
-        if (roundExercises == null) {
+        return (roundExercises != null)
+                ? roundExercises.stream().map(RoundExerciseEntity::getId).collect(Collectors.toList())
+                : null;
+    }
+
+    // Método auxiliar para mapear routineId a una entidad RoutineEntity
+    @Named("mapRoutineIdToEntity")
+    default RoutineEntity mapRoutineIdToEntity(Long routineId) {
+        if (routineId == null) {
             return null;
         }
-        return roundExercises.stream()
-                .map(RoundExerciseEntity::getId)
-                .collect(Collectors.toList());
+        RoutineEntity routine = new RoutineEntity();
+        routine.setId(routineId);
+        return routine;
     }
 }

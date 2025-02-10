@@ -18,6 +18,4 @@ public class Training {
     private String description;
     private BigDecimal price;
     private LocalDateTime createdAt;
-    private List<Long> routineIds;      // Referencia a RoutineEntity por IDs
-    private List<Long> trainingTagIds;  // Referencia a TrainingTags por IDs
 }
