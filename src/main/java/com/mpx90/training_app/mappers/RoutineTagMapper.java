@@ -1,8 +1,8 @@
 package com.mpx90.training_app.mappers;
 
-import com.mpx90.training_app.models.training.RoutineTagEntity;
 import com.mpx90.training_app.dto.core.RoutineTag;
 import com.mpx90.training_app.models.training.RoutineEntity;
+import com.mpx90.training_app.models.training.RoutineTagEntity;
 import com.mpx90.training_app.models.training.TagEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

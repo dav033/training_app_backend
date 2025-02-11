@@ -14,6 +14,6 @@ public class RoundExercise {
     Long roundId;        // Referencia al RoundEntity por ID
     Long exerciseId;     // Referencia al ExerciseEntity por ID
     String repetitions;
-    Integer position;
+    Integer exercisePosition;
     LocalDateTime createdAt;
 }

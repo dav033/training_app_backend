@@ -1,7 +1,7 @@
 package com.mpx90.training_app.mappers;
 
-import com.mpx90.training_app.models.training.TagEntity;
 import com.mpx90.training_app.dto.core.Tag;
+import com.mpx90.training_app.models.training.TagEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

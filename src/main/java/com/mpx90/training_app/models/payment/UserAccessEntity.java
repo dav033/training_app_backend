@@ -1,12 +1,12 @@
 package com.mpx90.training_app.models.payment;
 
 
+import com.mpx90.training_app.enums.AccessType;
 import com.mpx90.training_app.models.UserEntity;
 import com.mpx90.training_app.models.training.RoutineEntity;
 import com.mpx90.training_app.models.training.TrainingEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import com.mpx90.training_app.enums.AccessType;  // ✅ Asegúrate de tener esta importación
 
 import java.time.LocalDateTime;
 

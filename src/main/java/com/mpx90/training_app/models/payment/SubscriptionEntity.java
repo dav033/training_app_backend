@@ -4,6 +4,7 @@ import com.mpx90.training_app.enums.SubscriptionStatus;
 import com.mpx90.training_app.models.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity

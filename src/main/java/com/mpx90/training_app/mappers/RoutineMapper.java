@@ -1,17 +1,13 @@
 package com.mpx90.training_app.mappers;
 
-import com.mpx90.training_app.models.training.RoutineEntity;
 import com.mpx90.training_app.dto.core.Routine;
-import com.mpx90.training_app.models.training.RoundEntity;
+import com.mpx90.training_app.models.training.RoutineEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface RoutineMapper extends GenericMapper<Routine, RoutineEntity> {

@@ -1,8 +1,8 @@
 package com.mpx90.training_app.mappers;
 
-import com.mpx90.training_app.models.payment.UserAccessEntity;
 import com.mpx90.training_app.dto.core.UserAccess;
 import com.mpx90.training_app.models.UserEntity;
+import com.mpx90.training_app.models.payment.UserAccessEntity;
 import com.mpx90.training_app.models.training.RoutineEntity;
 import com.mpx90.training_app.models.training.TrainingEntity;
 import org.mapstruct.Mapper;

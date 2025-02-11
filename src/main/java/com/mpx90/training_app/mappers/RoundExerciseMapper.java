@@ -1,9 +1,9 @@
 package com.mpx90.training_app.mappers;
 
 import com.mpx90.training_app.dto.core.RoundExercise;
-import com.mpx90.training_app.models.training.RoundExerciseEntity;
-import com.mpx90.training_app.models.training.RoundEntity;
 import com.mpx90.training_app.models.training.ExerciseEntity;
+import com.mpx90.training_app.models.training.RoundEntity;
+import com.mpx90.training_app.models.training.RoundExerciseEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

@@ -30,9 +30,14 @@ public class RoundExerciseEntity {
     @Column(nullable = false)
     private String repetitions;
 
-    @Column(nullable = false)
-    private Integer position;
+    @Column(nullable = false, name ="exercise_position")
+    private Integer exercisePosition;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }
