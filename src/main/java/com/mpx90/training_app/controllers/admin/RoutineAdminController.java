@@ -32,5 +32,10 @@ public class RoutineAdminController {
         return ResponseEntity.ok(routineService.getAllRoutineData(id));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Routine> updateRoutine(@PathVariable Long id, @RequestBody Routine routine) {
+        return ResponseEntity.ok(routineService.update(id, routine));
+    }
+
 
 }

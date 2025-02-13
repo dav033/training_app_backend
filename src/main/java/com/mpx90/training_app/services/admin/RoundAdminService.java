@@ -10,6 +10,7 @@ import com.mpx90.training_app.repositories.RoundRepository;
 import com.mpx90.training_app.services.base.BaseService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.Collections;
 import java.util.List;
@@ -48,5 +49,26 @@ public class RoundAdminService extends BaseService<Round, Long, RoundEntity, Rou
             return savedRound;
 
         }).toList();
+    }
+
+    public List<Round> deleteRoundByIdAndUpdateRoundsPosition(Long routineId, long RoundId) {
+
+        List<Round> rounds = findAllByRoutineId(routineId);
+
+        Number deletedRoundPosition = rounds.stream().filter(round -> round.getId().equals(RoundId)).findFirst().get().getRoundPosition();
+
+        delete(RoundId);
+
+        rounds.stream().filter(round -> round.getRoundPosition().intValue() > deletedRoundPosition.intValue()).forEach(round -> {
+            round.setRoundPosition(round.getRoundPosition() - 1);
+            update(round.getId(), round);
+        });
+
+        return findAllByRoutineId(routineId);
+
+    }
+
+    public void updateListRoundPosition(List<Round> rounds) {
+        rounds.forEach(round -> update(round.getId(), round));
     }
 }

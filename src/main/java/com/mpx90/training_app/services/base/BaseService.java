@@ -2,6 +2,7 @@ package com.mpx90.training_app.services.base;
 
 import com.mpx90.training_app.dto.core.Round;
 import com.mpx90.training_app.mappers.GenericMapper;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -51,10 +52,14 @@ public abstract class BaseService<T, ID, E, R extends JpaRepository<E, ID>> impl
 
     @Override
     public T update(ID id, T dto) {
-        E entity = repository.findById(id).orElseThrow();
-        mapper.toEntity(dto);
+        E entity = repository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Entidad no encontrada con id " + id));
+        // Actualiza la entidad existente utilizando el mapper genérico
+        mapper.updateEntity(dto, entity);
         return mapper.toDto(repository.save(entity));
     }
+
+
 
     @Override
     public List<Round> saveAll(List<T> dtos) {

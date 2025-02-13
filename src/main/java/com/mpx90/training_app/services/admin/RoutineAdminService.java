@@ -35,8 +35,11 @@ public class RoutineAdminService extends BaseService<Routine, Long, RoutineEntit
 
     public RoutineAllDataResponse getAllRoutineData(Long id) {
         Routine routine = findById(id);
+
         List<Round> rounds = roundAdminService.findAllByRoutineId(id);
+
         Map<Long, List<RoundExerciseData>> roundExerciseDataMap = roundExerciseAdminService.getRoundExerciseData(rounds);
+
         List<RoundData> roundData = buildRoundData(rounds, roundExerciseDataMap);
 
         return RoutineAllDataResponse.builder().routine(routine).roundData(roundData).build();
