@@ -1,5 +1,6 @@
 package com.mpx90.training_app.models.training;
 
+import com.mpx90.training_app.enums.RoundExerciseRepetitionsTime;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,10 +28,18 @@ public class RoundExerciseEntity {
     @JoinColumn(name = "exercise_id", nullable = false)
     private ExerciseEntity exercise;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
+    private Integer time;
+
+    @Column(nullable = true)
     private String repetitions;
 
-    @Column(nullable = false, name ="exercise_position")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RoundExerciseRepetitionsTime roundExerciseType;
+
+
+    @Column(nullable = false, name = "exercise_position")
     private Integer exercisePosition;
 
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -39,5 +48,9 @@ public class RoundExerciseEntity {
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
+        this.roundExerciseType = RoundExerciseRepetitionsTime.REPS;
+        this.repetitions = "10";
+        this.time = 30;
     }
+
 }

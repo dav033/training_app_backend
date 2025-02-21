@@ -3,7 +3,6 @@ package com.mpx90.training_app.controllers.admin;
 
 import com.mpx90.training_app.dto.core.Round;
 import com.mpx90.training_app.dto.requests.DeleteRoundRequest;
-import com.mpx90.training_app.dto.requests.RoundRequest;
 import com.mpx90.training_app.dto.requests.UpdateRoundListRequest;
 import com.mpx90.training_app.services.admin.RoundAdminService;
 import lombok.AllArgsConstructor;
@@ -29,13 +28,6 @@ public class RoundAdminController {
     @GetMapping
     public ResponseEntity<List<Round>> getAllRounds() {
         return ResponseEntity.ok(roundService.findAll());
-    }
-
-
-    @PostMapping("/batch")
-    public ResponseEntity<String> createRounds(@RequestBody RoundRequest roundRequests) {
-        roundService.createRoundsWithExercises(roundRequests);
-        return ResponseEntity.ok("Rondas y ejercicios creados exitosamente.");
     }
 
 

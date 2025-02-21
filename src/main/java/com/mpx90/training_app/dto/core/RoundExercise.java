@@ -1,5 +1,6 @@
 package com.mpx90.training_app.dto.core;
 
+import com.mpx90.training_app.enums.RoundExerciseRepetitionsTime;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,8 @@ public class RoundExercise {
     Long roundId;        // Referencia al RoundEntity por ID
     Long exerciseId;     // Referencia al ExerciseEntity por ID
     String repetitions;
+    Integer time;
+    RoundExerciseRepetitionsTime roundExerciseType;
     Integer exercisePosition;
     LocalDateTime createdAt;
 }

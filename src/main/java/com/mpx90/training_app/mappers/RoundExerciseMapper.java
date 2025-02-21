@@ -18,9 +18,10 @@ public interface RoundExerciseMapper extends GenericMapper<RoundExercise, RoundE
     @Mapping(source = "exercise.id", target = "exerciseId")
     RoundExercise toDto(RoundExerciseEntity entity);
 
-    // Mapeo de DTO a Entity con métodos auxiliares para evitar referencias directas
+    // Mapeo de DTO a Entity
     @Mapping(source = "roundId", target = "round", qualifiedByName = "mapRoundIdToEntity")
     @Mapping(source = "exerciseId", target = "exercise", qualifiedByName = "mapExerciseIdToEntity")
+    @Mapping(target = "createdAt", ignore = true) // Se ignora para que se asigne automáticamente
     RoundExerciseEntity toEntity(RoundExercise dto);
 
     @Named("mapRoundIdToEntity")

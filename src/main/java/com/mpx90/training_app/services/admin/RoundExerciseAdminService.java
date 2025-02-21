@@ -29,14 +29,14 @@ public class RoundExerciseAdminService extends BaseService<RoundExercise, Long, 
         this.exerciseAdminService = exerciseAdminService;
     }
 
-    public void createRoundExerciseByRequestList(List<RoundExerciseDto> roundExerciseDtos, Long roundId) {
-
-        roundExerciseDtos.forEach(exerciseDto -> {
-            RoundExercise roundExercise = RoundExercise.builder().roundId(roundId).exerciseId(exerciseDto.getExerciseId()).repetitions(exerciseDto.getRepetitions()).exercisePosition(exerciseDto.getExercisePosition()).build();
-
-            create(roundExercise);
-        });
-    }
+//    public void createRoundExerciseByRequestList(List<RoundExerciseDto> roundExerciseDtos, Long roundId) {
+//
+//        roundExerciseDtos.forEach(exerciseDto -> {
+//            RoundExercise roundExercise = RoundExercise.builder().roundId(roundId).exerciseId(exerciseDto.getExerciseId()).repetitions(Integer.valueOf(exerciseDto.getRepetitions())).exercisePosition(exerciseDto.getExercisePosition()).build();
+//
+//            create(roundExercise);
+//        });
+//    }
 
 
     public List<RoundExercise> findAllByRoundId(Long roundId) {
@@ -59,6 +59,13 @@ public class RoundExerciseAdminService extends BaseService<RoundExercise, Long, 
 
         return groupRoundExercisesByRoundId(roundExercises, exerciseMap);
     }
+
+    public void updateListRoundExercisePosition(List<RoundExercise> roundExercises) {
+        roundExercises.forEach(roundExercise -> {
+            update(roundExercise.getId(), roundExercise);
+        });
+    }
+
 
     private Set<Long> extractRoundIds(List<Round> rounds) {
         return rounds.stream().map(Round::getId).collect(Collectors.toSet());

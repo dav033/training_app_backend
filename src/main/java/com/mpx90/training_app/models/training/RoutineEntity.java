@@ -33,6 +33,9 @@ public class RoutineEntity {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Column(name="is_public", nullable = false)
+    private Boolean isPublic = false;
+
 
     @PrePersist
     protected void onCreate() {
@@ -42,4 +45,7 @@ public class RoutineEntity {
             this.price = BigDecimal.ZERO;
         }
     }
+
+    //hacer que si la columna ispublic es null se ponga a false para todos los registros
+
 }
