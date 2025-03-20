@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(
-        name = "exercises",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "name")
-        }
+    name = "exercises",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name")
+    }
 )
 @Getter
 @Setter
@@ -30,6 +30,12 @@ public class ExerciseEntity {
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(name = "videoUrl")
+    private String videoUrl;
+
+    @Column(name="thumbnail_url")
+    private String thumbnailUrl;
 
     @PrePersist
     protected void onCreate() {

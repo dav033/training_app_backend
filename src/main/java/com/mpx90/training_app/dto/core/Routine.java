@@ -17,4 +17,5 @@ public class Routine {
     Double price;
     LocalDateTime createdAt;
     Boolean isPublic;
+    String thumbnailUrl;
 }

@@ -17,8 +17,16 @@ public class ExerciseAdminController {
 
     @PostMapping
     public ResponseEntity<Exercise> createExercise(@RequestBody Exercise exercise) {
-        Exercise createdExercise = exerciseService.create(exercise);
-        return ResponseEntity.ok(createdExercise);
+        try {
+            exerciseService.existByName(exercise.getName());
+
+
+            Exercise createdExercise = exerciseService.create(exercise);
+            return ResponseEntity.ok(createdExercise);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping

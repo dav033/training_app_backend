@@ -22,6 +22,8 @@ public class TokenValidationService {
             return false;
         }
 
+        System.out.println("username: " + username);
+
         if(!username.equals(user.getEmail())) {
             return false;
         }

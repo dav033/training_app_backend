@@ -14,6 +14,7 @@ import java.util.UUID;
 public class User {
     private Long id;
     private Role role;
+    private String name;
     private String email;
     private UUID uuid;
     private LocalDateTime createdAt;

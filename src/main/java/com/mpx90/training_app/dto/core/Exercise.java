@@ -15,4 +15,6 @@ public class Exercise {
     private String name;
     private String description;
     private LocalDateTime createdAt;
+    private String videoUrl;
+    private String thumbnailUrl;
 }

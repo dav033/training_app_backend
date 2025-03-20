@@ -42,8 +42,13 @@ public class RoundAdminController {
 
     @PutMapping("/list")
     public void updateListRoundPosition(@RequestBody UpdateRoundListRequest rounds) {
-        roundService.updateListRoundPosition(rounds.getRounds());
+
+        try {
+            roundService.updateListRoundPosition(rounds.getRounds());
+        }catch (
+                Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
-
-
 }

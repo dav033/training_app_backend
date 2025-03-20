@@ -36,10 +36,15 @@ public class RoutineEntity {
     @Column(name="is_public", nullable = false)
     private Boolean isPublic = false;
 
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
+
 
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
+
+        this.isPublic = this.isPublic != null ? this.isPublic : false;
 
         if (this.price == null) {
             this.price = BigDecimal.ZERO;

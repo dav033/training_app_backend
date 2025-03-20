@@ -18,11 +18,13 @@ public interface UserMapper extends GenericMapper<User, UserEntity> {
     // Mapeo de Entity a DTO
     @Mapping(source = "uuid", target = "uuid", qualifiedByName = "mapUuidToString")
     @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapCreatedAt")
+    @Mapping(source = "name", target = "name")
     User toDto(UserEntity entity);
 
     // Mapeo de DTO a Entity con manejo seguro de UUID y fechas
     @Mapping(source = "uuid", target = "uuid", qualifiedByName = "mapStringToUuid")
     @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapCreatedAt")
+    @Mapping(source = "name", target = "name")
     UserEntity toEntity(User dto);
 
     @Named("mapUuidToString")

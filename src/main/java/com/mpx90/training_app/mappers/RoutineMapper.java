@@ -19,10 +19,12 @@ public interface RoutineMapper extends GenericMapper<Routine, RoutineEntity> {
 
     @Mapping(source = "training.id", target = "trainingId")
     @Mapping(source = "price", target = "price", qualifiedByName = "bigDecimalToDouble")
+    @Mapping(source = "thumbnailUrl", target = "thumbnailUrl")
     Routine toDto(RoutineEntity entity);
 
     @Mapping(target = "training", ignore = true)
     @Mapping(source = "price", target = "price", qualifiedByName = "doubleToBigDecimal")
+    @Mapping(source = "thumbnailUrl", target = "thumbnailUrl")
     RoutineEntity toEntity(Routine dto);
 
     // Actualiza la entidad existente:
@@ -33,6 +35,7 @@ public interface RoutineMapper extends GenericMapper<Routine, RoutineEntity> {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "training", ignore = true)
     @Mapping(source = "price", target = "price", qualifiedByName = "doubleToBigDecimal")
+    @Mapping(source = "thumbnailUrl", target = "thumbnailUrl")
     void updateEntity(Routine dto, @MappingTarget RoutineEntity entity);
 
     @Named("bigDecimalToDouble")
